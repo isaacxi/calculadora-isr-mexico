@@ -41,7 +41,7 @@ export default function Home() {
       {/* Header / SEO Title */}
       <header className="max-w-xl w-full text-center my-6">
         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-          Calculadora ISR México 🇲🇽
+          Calculadora ISR de México 🇲🇽
         </h1>
         <p className="text-sm text-slate-500 mt-2">
           Calcula de forma rápida tu ISR estimado para Sueldos & Salarios y RESICO.
