@@ -5,26 +5,26 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Calculadora ISR 2026 México | Sueldos, RESICO, Actividad Empresarial y RIF",
+  metadataBase: new URL("https://calculadora-isr-mexico-livid.vercel.app"),
+  title: "Calculadora de ISR 2026 en México | Sueldos, RESICO y Actividad Empresarial",
   description:
-    "Calcula gratis y al instante tu Impuesto Sobre la Renta (ISR) en México para 2026. Herramienta auditada según las tablas del SAT (Art. 96, 113-E y 106 de la LISR).",
+    "Estima tu ISR 2026 en México para sueldos y salarios, RESICO y actividad empresarial. Consulta la metodología, retenciones y límites de esta herramienta orientativa.",
   keywords: [
-    "Calculadora ISR 2026",
+    "Calculadora de ISR 2026",
     "Calcular ISR Mexico",
     "Retencion ISR Sueldos y Salarios",
     "Calculadora RESICO Persona Fisica",
-    "Calculadora Actividad Empresarial SAT",
-    "Calculadora RIF Bimestral",
-    "Tablas ISR SAT 2026",
-    "Subsidio al empleo 2026",
+    "Pagos provisionales ISR",
+    "Tablas ISR Articulo 96 LISR",
   ],
-  authors: [{ name: "Calculadora ISR México" }],
-  creator: "Calculadora ISR México",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Calculadora ISR 2026 México | Herramienta Fiscal Gratuita",
+    title: "Calculadora de ISR 2026 en México",
     description:
-      "Calcula las retenciones y pagos provisionales de ISR para Sueldos, RESICO, Actividad Empresarial y RIF con las tablas oficiales del SAT.",
-    url: "https://calculadora-isr-mexico-livid.vercel.app/",
+      "Calcula una estimación de ISR por régimen fiscal y consulta la metodología de cálculo conforme a la LISR.",
+    url: "/",
     siteName: "Calculadora ISR México",
     locale: "es_MX",
     type: "website",
@@ -32,13 +32,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
 };
 
