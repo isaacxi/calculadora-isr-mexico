@@ -24,7 +24,6 @@ const TARIFA_MENSUAL_ISR_2026: TramoISR[] = [
   { limiteInferior: 425642.00, limiteSuperior: Number.POSITIVE_INFINITY, cuotaFija: 133488.54, tasaExcedente: 0.35 },
 ];
 
-// Tarifa Bimestral estimada para RIF (Escalada a 2 meses)
 const TARIFA_BIMESTRAL_RIF_2026: TramoISR[] = TARIFA_MENSUAL_ISR_2026.map((tramo) => ({
   limiteInferior: Math.round(tramo.limiteInferior * 2 * 100) / 100,
   limiteSuperior: tramo.limiteSuperior === Number.POSITIVE_INFINITY ? Number.POSITIVE_INFINITY : Math.round(tramo.limiteSuperior * 2 * 100) / 100,
@@ -37,7 +36,6 @@ const centavos = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100
 export default function Home() {
   const [regimen, setRegimen] = useState<"sueldos" | "resico" | "actividad" | "rif">("sueldos");
 
-  // Inputs generales y acumulados
   const [ingresos, setIngresos] = useState<string>("");
   const [deducciones, setDeducciones] = useState<string>("");
   const [mesesTranscurridos, setMesesTranscurridos] = useState<number>(1);
@@ -51,7 +49,7 @@ export default function Home() {
   const numPagosPrevios = parseFloat(pagosProvisionalesPrevios) || 0;
   const numHonorariosPM = parseFloat(honorariosPM) || 0;
 
-  // --- MOTOR 1: SUELDOS Y SALARIOS ---
+  // CÁLCULOS
   const calcSueldos = () => {
     if (numIngresos < 0.01) return { isrTarifa: 0, subsidio: 0, isrRetener: 0 };
     const tramo = TARIFA_MENSUAL_ISR_2026.find((r) => numIngresos <= r.limiteSuperior)!;
@@ -62,7 +60,6 @@ export default function Home() {
     return { isrTarifa, subsidio: subsidioAplicado, isrRetener: Math.max(0, centavos(isrTarifa - subsidioAplicado)) };
   };
 
-  // --- MOTOR 2: RESICO ---
   const calcResico = () => {
     if (numIngresos <= 0) return { tasaStr: "0%", isrMensual: 0, retencionPM: 0, isrNeto: 0 };
     const tramos = [
@@ -79,12 +76,10 @@ export default function Home() {
     return { tasaStr: tramo.str, isrMensual, retencionPM, isrNeto: Math.max(0, centavos(isrMensual - retencionPM)) };
   };
 
-  // --- MOTOR 3: ACTIVIDAD EMPRESARIAL Y PROFESIONAL ---
   const calcActividad = () => {
     const utilidadAcumulada = Math.max(0, numIngresos - numDeducciones);
     if (utilidadAcumulada <= 0) return { utilidadAcumulada: 0, isrAcumulado: 0, retencion10: 0, pagoProvisional: 0 };
     
-    // Escalar tarifa por número de meses (1 a 12)
     const m = Math.max(1, Math.min(12, mesesTranscurridos));
     const tarifaEscalada = TARIFA_MENSUAL_ISR_2026.map((t) => ({
       limiteInferior: centavos(t.limiteInferior * m),
@@ -101,7 +96,6 @@ export default function Home() {
     return { utilidadAcumulada, isrAcumulado, retencion10, pagoProvisional };
   };
 
-  // --- MOTOR 4: RIF ---
   const calcRIF = () => {
     const utilidadBimestral = Math.max(0, numIngresos - numDeducciones);
     if (utilidadBimestral <= 0) return { utilidadBimestral: 0, isrCausado: 0, porcReduccion: 0, isrPagar: 0 };
@@ -119,17 +113,17 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800 p-4 sm:p-8 flex flex-col items-center">
-      <header className="max-w-xl w-full text-center my-6">
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-          Calculadora ISR México 🇲🇽
+      <header className="max-w-3xl w-full text-center my-6">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Calculadora ISR México 2026 🇲🇽
         </h1>
-        <p className="text-sm text-slate-500 mt-2">
-          Simulador multicálculo para Personas Físicas (SAT México - LISR 2026).
+        <p className="text-sm sm:text-base text-slate-600 mt-2">
+          Calcula gratis y al instante la retención y pago provisional de ISR para Sueldos, RESICO, Actividad Empresarial y RIF.
         </p>
       </header>
 
-      <div className="max-w-xl w-full bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8">
-        {/* Selector Desplegable de Régimen */}
+      <div className="max-w-xl w-full bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8 mb-12">
+        {/* Selector Desplegable */}
         <div className="mb-6">
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
             Selecciona tu Régimen Fiscal
@@ -146,7 +140,7 @@ export default function Home() {
           </select>
         </div>
 
-        {/* Formulario Dinámico */}
+        {/* Inputs */}
         <div className="space-y-4 mb-6">
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
@@ -249,7 +243,7 @@ export default function Home() {
           )}
         </div>
 
-        {/* Panel de Resultados */}
+        {/* Resultados */}
         <div className="bg-slate-900 text-white rounded-xl p-5 space-y-3">
           {regimen === "sueldos" && (
             <>
@@ -339,9 +333,79 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="max-w-xl w-full text-center mt-8 text-xs text-slate-400">
+      {/* SECCIÓN DE CONTENIDO DE VALOR PARA GUÍA Y ADSENSE */}
+      <section className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 space-y-8">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-3">
+            Guía de Regímenes Fiscales para Personas Físicas en México (SAT 2026)
+          </h2>
+          <p className="text-slate-600 text-sm leading-relaxed">
+            El Impuesto Sobre la Renta (ISR) es un tributo directo que se aplica sobre las ganancias e ingresos obtenidos por los contribuyentes en México. Dependiendo de la actividad económica que realices, el SAT establece distintas reglas, tarifas y beneficios fiscales.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+            <h3 className="font-bold text-slate-800 text-base mb-2">1. Sueldos y Salarios</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Aplica a trabajadores subordinados. El patrón retiene el ISR mensualmente según la tabla progresiva del Art. 96 de la LISR. Se contempla el Subsidio al Empleo para sueldos de hasta $10,171.00 MXN.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+            <h3 className="font-bold text-slate-800 text-base mb-2">2. RESICO (Régimen Simplificado)</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Diseñado para personas físicas con ingresos de hasta $3.5 MDP anuales. Ofrece tasas efectivas muy bajas (1% al 2.5%) calculadas directamente sobre los ingresos cobrados sin IVA.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+            <h3 className="font-bold text-slate-800 text-base mb-2">3. Actividad Empresarial y Profesional</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Aplica a freelancers, profesionales por honorarios y negocios. El impuesto se calcula sobre la utilidad gravable (Ingresos menos Deducciones autorizadas) de manera acumulativa durante el año.
+            </p>
+          </div>
+
+          <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+            <h3 className="font-bold text-slate-800 text-base mb-2">4. RIF (Régimen Transitorio)</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Exclusivo para contribuyentes inscritos antes de agosto de 2021. Realizan pagos bimestrales definitivos con una reducción del ISR que va del 100% al 10% según su año de antigüedad.
+            </p>
+          </div>
+        </div>
+
+        {/* FAQs */}
+        <div className="pt-6 border-t border-slate-100">
+          <h3 className="text-xl font-bold text-slate-900 mb-4">Preguntas Frecuentes (FAQs)</h3>
+          
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold text-slate-800 text-sm">¿Cómo se calcula el ISR sobre el sueldo bruto?</h4>
+              <p className="text-xs text-slate-600 mt-1">
+                Se toma el sueldo mensual bruto, se ubica en el rango de la tabla del Art. 96 de la LISR, se resta el Límite Inferior para obtener el excedente, se multiplica por la tasa del tramo y finalmente se le suma la Cuota Fija.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-slate-800 text-sm">¿Qué pasa si le facturo a una Persona Moral en RESICO?</h4>
+              <p className="text-xs text-slate-600 mt-1">
+                La Persona Moral está obligada por ley a retener el 1.25% sobre el valor total de los servicios o bienes facturados (sin IVA). Esta retención se acredita contra tu pago mensual de ISR.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-slate-800 text-sm">¿Esta calculadora es gratuita?</h4>
+              <p className="text-xs text-slate-600 mt-1">
+                Sí, es una herramienta gratuita de orientación fiscal basada en las disposiciones y tablas vigentes publicadas por el SAT en la Resolución Miscelánea Fiscal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="max-w-xl w-full text-center mt-8 text-xs text-slate-400 mb-6">
         <p>
-          Herramienta de simulación fiscal orientativa basada en la Ley del Impuesto sobre la Renta (LISR) vigente en México.
+          © 2026 Calculadora ISR México. Herramienta orientativa basada en la Ley del Impuesto sobre la Renta (LISR).
         </p>
       </footer>
     </main>
