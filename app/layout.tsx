@@ -9,9 +9,6 @@ export const metadata: Metadata = {
   title: "Calculadora de ISR 2026 en México | Sueldos, RESICO y Actividad Empresarial",
   description:
     "Estima tu ISR 2026 en México para sueldos y salarios, RESICO y actividad empresarial. Consulta la metodología, retenciones y límites de esta herramienta orientativa.",
-  verification: {
-    google: "<meta name="google-site-verification" content="7SVTCuzRPjiSBaNf9mVaRcwzgzNX8AuWwpMuKsb3f1E" />", // Pega solo el string del content de Google
-  },
   keywords: [
     "Calculadora de ISR 2026",
     "Calcular ISR Mexico",
@@ -20,6 +17,9 @@ export const metadata: Metadata = {
     "Pagos provisionales ISR",
     "Tablas ISR Articulo 96 LISR",
   ],
+  verification: {
+    google: "7SVTCuzRPjiSBaNf9mVaRcwzgzNX8AuWwpMuKsb3f1E",
+  },
   alternates: {
     canonical: "/",
   },
