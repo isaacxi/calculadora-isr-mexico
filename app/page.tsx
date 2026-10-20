@@ -479,11 +479,27 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="max-w-xl w-full text-center mt-8 text-xs text-slate-400 mb-6">
-          <p>
-            © 2026 Calculadora de ISR México. Simulación orientativa conforme a la LISR.
-          </p>
-        </footer>
+       <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-8 mt-16 text-xs text-center">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+    
+    <!-- Enlaces Legales requeridos por Google AdSense -->
+    <div class="flex justify-center gap-6 text-slate-300 font-medium">
+      <a href="/privacidad" class="hover:text-white transition">Aviso de Privacidad</a>
+      <span class="text-slate-600">•</span>
+      <a href="/terminos" class="hover:text-white transition">Términos y Condiciones</a>
+    </div>
+
+    <!-- Leyenda Informativa -->
+    <p class="max-w-2xl mx-auto text-slate-500 leading-relaxed">
+      Esta herramienta es puramente informativa e ilustrativa basada en las tablas de retención del ISR publicadas en el DOF. No constituye asesoría fiscal o legal profesional.
+    </p>
+
+    <!-- Copyright -->
+    <p class="text-slate-400 font-semibold pt-2 border-t border-slate-800/80">
+      © 2026 FiniquitoMx — Un proyecto de ZG Group. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
       </main>
     </>
   );
