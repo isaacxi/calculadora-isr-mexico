@@ -51,14 +51,25 @@ export default function Home() {
   const numHonorariosPM = parseFloat(honorariosPM) || 0;
 
   // CÁLCULOS
-  const calcSueldos = () => {
+const calcSueldos = () => {
     if (numIngresos < 0.01) return { isrTarifa: 0, subsidio: 0, isrRetener: 0 };
+    
     const tramo = TARIFA_MENSUAL_ISR_2026.find((r) => numIngresos <= r.limiteSuperior)!;
     const isrTarifa = centavos(tramo.cuotaFija + (numIngresos - tramo.limiteInferior) * tramo.tasaExcedente);
-    const subsidioElegible = numIngresos <= 10171;
-    const subsidioDisponible = subsidioElegible ? centavos(3566.22 * 0.138) : 0;
+    
+    // Subsidio al empleo 2026: aplica para ingresos mensuales de hasta $11,492.66
+    const subsidioElegible = numIngresos <= 11492.66;
+    const subsidioDisponible = subsidioElegible ? 535.65 : 0;
+    
+    // El subsidio no puede ser mayor al ISR causado
     const subsidioAplicado = Math.min(isrTarifa, subsidioDisponible);
-    return { isrTarifa, subsidio: subsidioAplicado, isrRetener: Math.max(0, centavos(isrTarifa - subsidioAplicado)) };
+    const isrRetener = Math.max(0, centavos(isrTarifa - subsidioAplicado));
+
+    return { 
+      isrTarifa, 
+      subsidio: subsidioAplicado, 
+      isrRetener 
+    };
   };
 
   const calcResico = () => {
