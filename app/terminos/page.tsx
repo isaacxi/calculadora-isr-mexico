@@ -7,9 +7,9 @@ export default function TerminosPage() {
       {/* NAVEGACIÓN */}
       <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white">
+         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white">
             <span className="bg-blue-600 text-white px-2 py-1 rounded-md text-sm font-black">MX</span>
-            <span>FiniquitoMx</span>
+            <span>Calculadora ISR — ZG Group</span>
           </Link>
           <nav className="flex gap-6 text-sm font-medium text-slate-300">
             <Link href="/" className="hover:text-blue-400 transition">Calculadora ISR</Link>
