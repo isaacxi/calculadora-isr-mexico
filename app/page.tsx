@@ -185,11 +185,13 @@ export default function Home() {
               <span className="bg-blue-600 text-white px-2 py-1 rounded-md text-xs sm:text-sm font-black">MX</span>
               <span>Calculadora ISR — ZG Group</span>
             </Link>
-            <nav className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-medium text-slate-600">
+           <nav className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-medium text-slate-600">
               <Link href="/" className="text-blue-600 font-semibold">Calculadora</Link>
+              <Link href="/acerca" className="hover:text-blue-600 transition">Acerca de</Link>
               <Link href="/privacidad" className="hover:text-blue-600 transition">Aviso de Privacidad</Link>
               <Link href="/terminos" className="hover:text-blue-600 transition">Términos</Link>
-            </nav>
+          </nav>
+            
           </div>
         </header>
 
