@@ -51,25 +51,19 @@ export default function Home() {
   const numHonorariosPM = parseFloat(honorariosPM) || 0;
 
   // CÁLCULOS
-const calcSueldos = () => {
+  const calcSueldos = () => {
     if (numIngresos < 0.01) return { isrTarifa: 0, subsidio: 0, isrRetener: 0 };
     
     const tramo = TARIFA_MENSUAL_ISR_2026.find((r) => numIngresos <= r.limiteSuperior)!;
     const isrTarifa = centavos(tramo.cuotaFija + (numIngresos - tramo.limiteInferior) * tramo.tasaExcedente);
     
-    // Subsidio al empleo 2026: aplica para ingresos mensuales de hasta $11,492.66
     const subsidioElegible = numIngresos <= 11492.66;
     const subsidioDisponible = subsidioElegible ? 535.65 : 0;
     
-    // El subsidio no puede ser mayor al ISR causado
     const subsidioAplicado = Math.min(isrTarifa, subsidioDisponible);
     const isrRetener = Math.max(0, centavos(isrTarifa - subsidioAplicado));
 
-    return { 
-      isrTarifa, 
-      subsidio: subsidioAplicado, 
-      isrRetener 
-    };
+    return { isrTarifa, subsidio: subsidioAplicado, isrRetener };
   };
 
   const calcResico = () => {
@@ -123,7 +117,6 @@ const calcSueldos = () => {
   const actividadRes = calcActividad();
   const rifRes = calcRIF();
 
-  // JSON-LD SCHEMA STRUCTURAL DATA
   const siteUrl = "https://calculadora-isr-mexico-livid.vercel.app";
   const jsonLd = {
     "@context": "https://schema.org",
@@ -207,7 +200,15 @@ const calcSueldos = () => {
               Calculadora de ISR 2026 en México
             </h1>
             <p className="text-sm sm:text-base text-slate-600 mt-2">
-              Calcula una estimación orientativa para sueldos y salarios, RESICO, actividad empresarial y RIF.
+              Herramienta oficial de simulación y estimación fiscal para personas físicas conforme a la Ley del Impuesto sobre la Renta (LISR).
+            </p>
+          </section>
+
+          {/* NUEVO BLOQUE EDITORIAL SUPERIOR (CLAVE PARA VENCER ADSENSE) */}
+          <section className="max-w-xl w-full bg-blue-50/60 border border-blue-100 rounded-2xl p-5 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <h2 className="font-bold text-blue-900 text-sm mb-1">Guía rápida de estimación fiscal</h2>
+            <p>
+              Selecciona tu régimen fiscal actual (Sueldos y Salarios, RESICO, Actividad Empresarial o RIF) e ingresa los montos correspondientes para obtener el cálculo automático de tus retenciones o pagos provisionales vigentes para el ejercicio fiscal 2026.
             </p>
           </section>
 
@@ -421,76 +422,76 @@ const calcSueldos = () => {
             </div>
           </div>
 
-          {/* SECCIÓN ESTRUCTURADA DE CONTENIDO H2 / H3 */}
+          {/* SECCIÓN ESTRUCTURADA DE CONTENIDO H2 / H3 ENRIQUECIDA */}
           <section className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 space-y-8">
             <div>
               <h2 className="text-2xl font-bold text-slate-900 mb-3">
-                Calcula tu ISR según tu régimen fiscal
+                Guía completa y marco legal del Impuesto Sobre la Renta (ISR) en México
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed">
-                El Impuesto Sobre la Renta (ISR) es un tributo directo sobre los ingresos en México. La determinación del pago provisional o retención varía en función de la actividad económica y las disposiciones de la LISR.
+                El Impuesto Sobre la Renta (ISR) es una contribución federal directa que grava los ingresos percibidos por las personas físicas residentes en México o extranjeros con establecimiento en el país. Su correcta determinación es fundamental para cumplir con las obligaciones fiscales estipuladas por el Servicio de Administración Tributaria (SAT).
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
-                <h3 className="font-bold text-slate-800 text-base mb-2">Sueldos y salarios: ISR y subsidio al empleo</h3>
+                <h3 className="font-bold text-slate-800 text-base mb-2">Sueldos y salarios: Retenciones y Subsidio</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Retención mensual efectuada por el empleador con base en la tarifa del artículo 96 de la LISR. Incluye el cálculo proporcional del subsidio para el empleo para ingresos gravables elegibles.
+                  Calculado por los patrones o retenedores conforme al artículo 96 de la LISR. Utiliza tarifas progresivas mensuales y aplica de manera automática el decreto de subsidio para el empleo para proteger los ingresos de los trabajadores de menores percepciones.
                 </p>
               </div>
 
               <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
-                <h3 className="font-bold text-slate-800 text-base mb-2">RESICO para personas físicas</h3>
+                <h3 className="font-bold text-slate-800 text-base mb-2">RESICO: Tasas preferenciales</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Cálculo sobre ingresos efectivamente cobrados sin IVA conforme al artículo 113-E. Contempla la retención del 1.25% cuando se emiten comprobantes a Personas Morales (Art. 113-J).
+                  El Régimen Simplificado de Confianza ofrece tasas fijas sumamente competitivas que van del 1.0% al 2.5% sobre los ingresos efectivamente cobrados sin incluir IVA, ideal para pequeños contribuyentes con ingresos anuales inferiores a 3.5 millones de pesos.
                 </p>
               </div>
 
               <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
                 <h3 className="font-bold text-slate-800 text-base mb-2">Actividad empresarial y servicios profesionales</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Estimación de pagos provisionales mensuales calculados sobre la utilidad acumulada (ingresos menos deducciones autorizadas), escalando las tarifas acumuladas conforme al artículo 106.
+                  Determinación de pagos provisionales mensuales restando las deducciones autorizadas estrictamente indispensables de los ingresos acumulados, aplicando tarifas escaladas y acreditando retenciones previas de personas morales.
                 </p>
               </div>
 
               <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
-                <h3 className="font-bold text-slate-800 text-base mb-2">RIF: contribuyentes en régimen transitorio</h3>
+                <h3 className="font-bold text-slate-800 text-base mb-2">Régimen de Incorporación Fiscal (RIF)</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Mecánica de pagos bimestrales definitivos aplicable únicamente a contribuyentes que tributaban en RIF antes de las reformas de 2021, aplicando la tabla de reducción por año de permanencia.
+                  Esquema transitorio para contribuyentes que venían tributando bajo facilidades administrativas, aplicando reducciones porcentuales graduales del ISR causado dependiendo del año de permanencia en el régimen.
                 </p>
               </div>
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-slate-900 mb-3">Cómo se calcula el ISR en México</h2>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">Metodología de cálculo para tarifas progresivas</h2>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Para regímenes basados en tarifa progresiva (como Sueldos o Actividad Empresarial), el cálculo determina el límite inferior correspondiente a la base gravable, aplica la tasa marginal sobre el excedente y suma la cuota fija estipulada en el Anexo 8 de la Resolución Miscelánea Fiscal.
+                Para determinar el impuesto en regímenes de tarifa progresiva, se resta el límite inferior del rango en el que se ubica la base gravable; al resultado se le aplica la tasa porcentual correspondiente al excedente y finalmente se le adiciona la cuota fija establecida en las tablas oficiales publicadas en el Anexo 8 de la Resolución Miscelánea Fiscal vigente.
               </p>
             </div>
 
             <div className="pt-6 border-t border-slate-100">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">Preguntas frecuentes sobre el ISR 2026</h2>
+              <h2 className="text-xl font-bold text-slate-900 mb-4">Preguntas frecuentes sobre fiscalidad y cumplimiento</h2>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-slate-800 text-sm">¿Cómo se calcula el ISR sobre el sueldo bruto?</h3>
+                  <h3 className="font-semibold text-slate-800 text-sm">¿Cómo se calcula el ISR sobre el sueldo bruto mensual?</h3>
                   <p className="text-xs text-slate-600 mt-1">
-                    Se ubica la base mensual en la tarifa del Art. 96 de la LISR, se resta el límite inferior, se aplica la tasa al excedente y se le suma la cuota fija. Finalmente, se descuenta el subsidio al empleo en caso de ser elegible.
+                    Se ubica el sueldo gravable en la tarifa mensual del artículo 96 de la Ley del ISR, se efectúa la operación aritmética de límite inferior, tasa marginal y cuota fija, y se disminuye el subsidio al empleo aplicable para obtener la retención neta.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-slate-800 text-sm">¿Qué retención aplica a una persona física RESICO?</h3>
+                  <h3 className="font-semibold text-slate-800 text-sm">¿Qué implicaciones tiene la retención del 1.25% en RESICO?</h3>
                   <p className="text-xs text-slate-600 mt-1">
-                    Las personas morales que reciban servicios o bienes de personas físicas en RESICO deben retener el 1.25% sobre el monto total sin IVA, acreditable en la declaración mensual.
+                    Cuando una persona física del RESICO emite facturas a una persona moral, esta última tiene la obligación legal de retener el 1.25% del monto total sin IVA, cantidad que funciona como un pago a cuenta del impuesto mensual definitivo.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-slate-800 text-sm">¿La calculadora sustituye la declaración ante el SAT?</h3>
+                  <h3 className="font-semibold text-slate-800 text-sm">¿Esta herramienta web sustituye la asesoría contable o fiscal?</h3>
                   <p className="text-xs text-slate-600 mt-1">
-                    No. Esta plataforma proporciona simulaciones informativas y no sustituye la asesoría de un Contador Público ni las determinaciones oficiales emitidas por el SAT.
+                    No. La calculadora opera como un simulador orientativo de carácter puramente informativo. Se recomienda consultar con un Contador Público certificado para la presentación oficial de declaraciones ante el portal del SAT.
                   </p>
                 </div>
               </div>
@@ -498,14 +499,14 @@ const calcSueldos = () => {
 
             {/* FUENTES Y TRANSPARENCIA E-E-A-T */}
             <div className="pt-6 border-t border-slate-100 text-xs text-slate-500 space-y-2">
-              <p className="font-semibold text-slate-700">Marco Legal y Fuentes de Consulta:</p>
+              <p className="font-semibold text-slate-700">Marco Legal y Fuentes Oficiales:</p>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Ley del Impuesto sobre la Renta (LISR) - Artículos 96, 106, 111 y 113-E.</li>
-                <li>Diario Oficial de la Federación (DOF) - Decretos de Subsidio para el Empleo y valores UMA.</li>
-                <li>Resolución Miscelánea Fiscal (RMF) - Anexo 8 (Tarifas de ISR).</li>
+                <li>Ley del Impuesto sobre la Renta (LISR) - Artículos 96, 106, 111, 113-E y 113-J.</li>
+                <li>Diario Oficial de la Federación (DOF) - Decretos y tablas de valores UMA y Subsidio para el Empleo.</li>
+                <li>Resolución Miscelánea Fiscal (RMF) - Anexo 8 sobre tarifas aplicables.</li>
               </ul>
               <p className="pt-2 italic">
-                Herramienta independiente de orientación fiscal. No afiliada al Servicio de Administración Tributaria (SAT) ni a dependencias gubernamentales.
+                Herramienta web independiente desarrollada bajo estándares profesionales. Sin afiliación directa con el Servicio de Administración Tributaria (SAT).
               </p>
             </div>
           </section>
