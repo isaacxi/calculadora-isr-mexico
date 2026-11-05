@@ -414,14 +414,7 @@ export default function Home() {
               )}
             </div>
 
-            <div className="mt-8 p-4 border border-dashed border-slate-300 rounded-xl text-center bg-slate-50">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest block">
-                Anuncio / Publicidad
-              </span>
-              <div className="h-16 flex items-center justify-center text-slate-400 text-xs mt-1">
-                Espacio reservado para Google AdSense
-              </div>
-            </div>
+           
           </div>
 
           {/* SECCIÓN ESTRUCTURADA DE CONTENIDO H2 / H3 ENRIQUECIDA */}
