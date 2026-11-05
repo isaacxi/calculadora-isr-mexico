@@ -40,10 +40,10 @@ export default function AvisoPrivacidad() {
           El uso de cookies de publicidad por parte de Google permite que sus socios muestren anuncios a nuestros usuarios en función de su navegación. Los usuarios pueden desactivar la publicidad personalizada accediendo a la <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Configuración de anuncios de Google</a>.
         </p>
 
-        <h2 className="text-lg font-bold text-slate-900 pt-4">3. Derechos ARCO</h2>
-        <p>
-          Usted tiene derecho a conocer qué datos tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal (Rectificación), su eliminación de nuestros registros (Cancelación), así como oponerse al uso de sus datos para fines específicos (Oposición). Para ejercer estos derechos o resolver dudas, puede contactarnos a través de los canales oficiales de ZG Group.
-        </p>
+     <h2 className="text-lg font-bold text-slate-900 pt-4">3. Derechos ARCO y Contacto</h2>
+<p>
+  Usted tiene derecho a conocer qué datos tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal (Rectificación), su eliminación de nuestros registros (Cancelación), así como oponerse al uso de sus datos para fines específicos (Oposición). Para ejercer estos derechos o resolver cualquier duda relacionada con este aviso, puede contactarnos directamente a través del correo electrónico: <a href="mailto:contacto@zg-group.com.mx" className="text-blue-600 font-semibold underline">contacto@zg-group.com.mx</a>.
+</p>
       </main>
 
       <footer className="w-full bg-slate-900 border-t border-slate-800 text-slate-400 py-8 text-xs text-center">
