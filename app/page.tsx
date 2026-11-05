@@ -127,7 +127,7 @@ export default function Home() {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description:
-          "Calculadora orientativa de ISR para personas físicas en México: sueldos y salarios, RESICO, actividad empresarial y RIF transitorio.",
+          "Calculadora independiente de estimación fiscal y orientativa de ISR para personas físicas en México: sueldos y salarios, RESICO, actividad empresarial y RIF transitorio.",
         url: siteUrl,
         offers: {
           "@type": "Offer",
@@ -159,7 +159,7 @@ export default function Home() {
             name: "¿Esta calculadora sustituye una declaración ante el SAT?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. Es una herramienta orientativa independiente y no sustituye la determinación individual del impuesto ni la presentación de declaraciones ante el SAT.",
+              text: "No. Es una herramienta independiente de simulación y no sustituye la determinación individual del impuesto ni la presentación de declaraciones ante el SAT.",
             },
           },
         ],
@@ -178,7 +178,7 @@ export default function Home() {
       
       <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between font-sans antialiased">
         
-        {/* NAVEGACIÓN Y CABECERA OFICIAL */}
+        {/* NAVEGACIÓN Y CABECERA */}
         <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 font-bold text-lg sm:text-xl tracking-tight text-slate-900">
@@ -200,11 +200,11 @@ export default function Home() {
               Calculadora de ISR 2026 en México
             </h1>
             <p className="text-sm sm:text-base text-slate-600 mt-2">
-              Herramienta oficial de simulación y estimación fiscal para personas físicas conforme a la Ley del Impuesto sobre la Renta (LISR).
+              Herramienta independiente de simulación y estimación fiscal para personas físicas, desarrollada por ZG Group conforme a la Ley del Impuesto sobre la Renta (LISR).
             </p>
           </section>
 
-          {/* NUEVO BLOQUE EDITORIAL SUPERIOR (CLAVE PARA VENCER ADSENSE) */}
+          {/* GUÍA RÁPIDA EDITORIAL SUPERIOR */}
           <section className="max-w-xl w-full bg-blue-50/60 border border-blue-100 rounded-2xl p-5 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
             <h2 className="font-bold text-blue-900 text-sm mb-1">Guía rápida de estimación fiscal</h2>
             <p>
@@ -506,7 +506,7 @@ export default function Home() {
                 <li>Resolución Miscelánea Fiscal (RMF) - Anexo 8 sobre tarifas aplicables.</li>
               </ul>
               <p className="pt-2 italic">
-                Herramienta web independiente desarrollada bajo estándares profesionales. Sin afiliación directa con el Servicio de Administración Tributaria (SAT).
+                Herramienta web independiente desarrollada bajo estándares profesionales por ZG Group. Sin afiliación directa con el Servicio de Administración Tributaria (SAT).
               </p>
             </div>
           </section>
@@ -525,7 +525,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="max-w-2xl mx-auto text-slate-500 leading-relaxed">
-              Esta herramienta es un simulador puramente informativo y educativo basado en las tarifas de retención del ISR vigentes publicadas por el SAT en el DOF.
+              Esta herramienta es un simulador independiente, puramente informativo y educativo basado en las tarifas de retención del ISR vigentes publicadas por el SAT en el DOF.
             </p>
             <p className="text-slate-400 font-semibold pt-2 border-t border-slate-800/80">
               © 2026 Calculadora ISR — ZG Group. Todos los derechos reservados.
