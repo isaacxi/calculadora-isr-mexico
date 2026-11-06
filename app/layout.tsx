@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://calculadora-isr-mexico-livid.vercel.app"),
+  metadataBase: new URL("https://calculadoraisr.zg-group.com.mx"),
   title: "Calculadora de ISR 2026 en México | Sueldos, RESICO y Actividad Empresarial",
   description:
     "Estima tu ISR 2026 en México para sueldos y salarios, RESICO y actividad empresarial. Consulta la metodología, retenciones y límites de esta herramienta orientativa.",
@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   ],
   verification: {
     google: "7SVTCuzRPjiSBaNf9mVaRcwzgzNX8AuWwpMuKsb3f1E",
+    other: {
+      "google-adsense-account": "ca-pub-7266942130104345",
+    },
   },
   alternates: {
     canonical: "/",
