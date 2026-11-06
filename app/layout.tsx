@@ -19,9 +19,6 @@ export const metadata: Metadata = {
   ],
   verification: {
     google: "7SVTCuzRPjiSBaNf9mVaRcwzgzNX8AuWwpMuKsb3f1E",
-    other: {
-      "google-adsense-account": "ca-pub-7266942130104345",
-    },
   },
   alternates: {
     canonical: "/",
@@ -49,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="es-MX">
       <head>
+        <meta name="google-adsense-account" content="ca-pub-7266942130104345" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7266942130104345"
