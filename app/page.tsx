@@ -117,7 +117,7 @@ export default function Home() {
   const actividadRes = calcActividad();
   const rifRes = calcRIF();
 
-  const siteUrl = "https://calculadora-isr-mexico-livid.vercel.app";
+  const siteUrl = "https://calculadoraisr.zg-group.com.mx";
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
