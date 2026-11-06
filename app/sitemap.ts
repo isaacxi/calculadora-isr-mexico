@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://calculadora-isr-mexico-livid.vercel.app';
+  const baseUrl = 'https://calculadoraisr.zg-group.com.mx';
   
   return [
     {
