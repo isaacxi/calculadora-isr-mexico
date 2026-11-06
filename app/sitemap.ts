@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://calculadoraisr.zg-group.com.mx';
-  
+
   return [
     {
       url: baseUrl,
